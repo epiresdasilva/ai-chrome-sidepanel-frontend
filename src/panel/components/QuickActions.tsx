@@ -7,16 +7,16 @@ interface QuickActionsProps {
 const QuickActions: React.FC<QuickActionsProps> = ({ onActionClick }) => {
   return (
     <div className="quick-actions">
-      <button onClick={() => onActionClick('summarize')}>
+      <button onClick={() => onActionClick('resumir')}>
         Resumir
       </button>
-      <button onClick={() => onActionClick('simplify')}>
+      <button onClick={() => onActionClick('simplificar')}>
         Simplificar
       </button>
-      <button onClick={() => onActionClick('extract')}>
+      <button onClick={() => onActionClick('extrair_dados')}>
         Extrair dados
       </button>
-      <button onClick={() => onActionClick('rewrite')}>
+      <button onClick={() => onActionClick('reescrever')}>
         Reescrever
       </button>
     </div>

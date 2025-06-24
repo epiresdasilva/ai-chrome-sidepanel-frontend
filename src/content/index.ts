@@ -1,9 +1,14 @@
 import { extractPageContent } from './contentExtractor';
 
+console.log('Content script loaded');
+
 // Listen for messages from the background script
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  console.log('Content script received message:', message);
   if (message.action === 'getPageContent') {
     const content = extractPageContent();
+    console.log('Extracted content length:', content.length);
+    console.log('Content preview:', content.substring(0, 100));
     sendResponse({ content });
   }
   return true;

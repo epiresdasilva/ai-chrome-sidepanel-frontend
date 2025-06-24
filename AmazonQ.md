@@ -34,14 +34,34 @@ Para aplicações de página única (SPAs) como Notion e Medium, a extensão uti
 
 ### Configuração do Backend
 
+## Validação de Tokens
+
+A extensão implementa validação de tokens alinhada com o backend para garantir que o conteúdo enviado não exceda os limites:
+
+### Configuração
+- **Limite máximo**: 4000 tokens
+- **Cálculo**: `Math.ceil(charCount / 4.5)` (idêntico ao backend)
+- **Comportamento**: Truncate automático ao invés de bloqueio
+
+### Funcionalidades
+- **Truncate inteligente**: Corta o conteúdo no limite de tokens, tentando preservar palavras completas
+- **Indicador visual**: Mostra contagem de tokens com barra de progresso e ícones de status
+- **Feedback de truncate**: Informa ao usuário quando o conteúdo foi reduzido
+- **Preservação de contexto**: Adiciona indicador de truncate no final do conteúdo cortado
+
+### Componentes
+- `TokenInfo`: Componente visual que mostra status dos tokens
+- `tokenValidation.ts`: Utilitários para estimativa e truncate de tokens
+- Integração automática nas funções de API
+
 A URL do backend de IA pode ser configurada no arquivo `src/utils/api.ts`. O backend deve expor um endpoint `/ask` que aceita solicitações POST com o seguinte formato:
 
 ```json
 {
-  "action": "summarize|simplify|extract|rewrite",
-  "content": "Conteúdo extraído da página",
+  "action": "resumir|simplificar|extrair_dados|reescrever|pergunta",
   "language": "pt-BR|pt-PT|en|es",
-  "question": "Pergunta opcional do usuário"
+  "content": "Conteúdo extraído da página",
+  "userInput": "Pergunta opcional do usuário (apenas para action 'pergunta')"
 }
 ```
 

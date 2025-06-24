@@ -1,9 +1,11 @@
 export type Language = 'pt-BR' | 'pt-PT' | 'en' | 'es';
 
+export type Action = 'resumir' | 'simplificar' | 'extrair_dados' | 'reescrever' | 'pergunta';
+
 export interface Message {
-  action: string;
+  action: Action;
   content?: string;
-  question?: string;
+  userInput?: string;
   language?: Language;
 }
 
