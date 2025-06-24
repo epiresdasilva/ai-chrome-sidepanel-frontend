@@ -54,7 +54,29 @@ A extensão implementa validação de tokens alinhada com o backend para garanti
 - `tokenValidation.ts`: Utilitários para estimativa e truncate de tokens
 - Integração automática nas funções de API
 
-A URL do backend de IA pode ser configurada no arquivo `src/utils/api.ts`. O backend deve expor um endpoint `/ask` que aceita solicitações POST com o seguinte formato:
+## Configuração do Backend
+
+A extensão permite configurar a URL do backend de IA diretamente no painel lateral:
+
+### Funcionalidades
+- **URL configurável**: Campo para inserir a URL do seu backend
+- **Armazenamento local**: Configuração salva no localStorage do Chrome
+- **Default inteligente**: Usa `http://localhost:3000` como padrão para desenvolvimento local
+- **Validação de URL**: Verifica se a URL inserida é válida
+- **Interface amigável**: Modo de edição com botões Salvar/Cancelar
+
+### Como Usar
+1. **Primeira configuração**: Ao abrir o painel, configure a URL do seu backend
+2. **Editar URL**: Clique em "Editar" para alterar a URL
+3. **Salvar**: A configuração é salva automaticamente no navegador
+4. **Reutilização**: A URL configurada será lembrada nas próximas sessões
+
+### URLs de Exemplo
+- **Desenvolvimento local**: `http://localhost:3000`
+- **Servidor remoto**: `https://meu-backend.herokuapp.com`
+- **AWS ALB**: `http://ai-backend-alb-123456789.us-east-1.elb.amazonaws.com`
+
+A URL do backend deve expor um endpoint `/ask` que aceita solicitações POST com o seguinte formato:
 
 ```json
 {

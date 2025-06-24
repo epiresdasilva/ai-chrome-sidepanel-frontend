@@ -4,6 +4,7 @@ import QuickActions from './components/QuickActions';
 import QuestionForm from './components/QuestionForm';
 import ResponseDisplay from './components/ResponseDisplay';
 import TokenInfo from './components/TokenInfo';
+import BackendConfig from './components/BackendConfig';
 import { Language } from '../shared/types';
 import { sendRequest } from '../utils/api';
 import { testApiConnection, testTruncateFunction } from '../utils/debugApi';
@@ -14,6 +15,10 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [pageContent, setPageContent] = useState<string>('');
   const [truncationInfo, setTruncationInfo] = useState<any>(null);
+
+  const handleBackendUrlChange = (url: string) => {
+    console.log('Backend URL updated to:', url);
+  };
 
   // Fallback function to get content directly if content script fails
   const getContentFallback = async () => {
@@ -185,6 +190,8 @@ Dentro do limite: ${result.finalTokens <= result.maxTokens ? 'Sim' : 'Não'}`;
   return (
     <div className="app">
       <h1>AI Assistant</h1>
+      
+      <BackendConfig onUrlChange={handleBackendUrlChange} />
       
       <LanguageSelector 
         selectedLanguage={language} 

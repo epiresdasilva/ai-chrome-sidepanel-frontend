@@ -1,7 +1,20 @@
 import { Language, ResponseData } from '../shared/types';
 import { truncateToTokenLimit } from './tokenValidation';
 
-const API_URL = 'http://ai-chrome-sidepanel-backend-alb-1513131466.us-east-1.elb.amazonaws.com';
+// Default backend URL - localhost for local development
+const DEFAULT_API_URL = 'http://localhost:3000';
+
+/**
+ * Gets the current backend URL from storage
+ */
+const getBackendUrl = async (): Promise<string> => {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(['backendUrl'], (result) => {
+      resolve(result.backendUrl || DEFAULT_API_URL);
+    });
+  });
+};
+// const API_URL = 'http://localhost:3000';
 
 /**
  * Sends a request to the AI backend
@@ -13,6 +26,9 @@ export const sendRequest = async (
   userInput?: string
 ): Promise<ResponseData & { truncationInfo?: any }> => {
   try {
+    // Get current backend URL
+    const API_URL = await getBackendUrl();
+    
     // Truncate content if it exceeds token limits
     const truncationResult = truncateToTokenLimit(content);
     
@@ -27,6 +43,7 @@ export const sendRequest = async (
       requestBody.userInput = userInput;
     }
 
+    console.log('Sending request to:', API_URL);
     console.log('Sending request with token info:', {
       action,
       originalTokens: truncationResult.originalTokens,
@@ -164,6 +181,9 @@ export const sendStreamingRequest = async (
   onChunk?: (chunk: string) => void
 ): Promise<ResponseData & { truncationInfo?: any }> => {
   try {
+    // Get current backend URL
+    const API_URL = await getBackendUrl();
+    
     // Truncate content if it exceeds token limits
     const truncationResult = truncateToTokenLimit(content);
     
@@ -178,6 +198,7 @@ export const sendStreamingRequest = async (
       requestBody.userInput = userInput;
     }
 
+    console.log('Sending streaming request to:', API_URL);
     console.log('Sending streaming request with token info:', {
       action,
       originalTokens: truncationResult.originalTokens,

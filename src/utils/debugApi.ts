@@ -4,11 +4,24 @@
 
 import { truncateToTokenLimit, estimateTokens } from './tokenValidation';
 
+/**
+ * Gets the current backend URL from storage
+ */
+const getBackendUrl = async (): Promise<string> => {
+  return new Promise((resolve) => {
+    chrome.storage.local.get(['backendUrl'], (result) => {
+      resolve(result.backendUrl || 'http://localhost:3000');
+    });
+  });
+};
+
 export const testApiConnection = async () => {
-  const API_URL = 'http://ai-chrome-sidepanel-backend-alb-1513131466.us-east-1.elb.amazonaws.com';
-  
   try {
     console.log('Testing API connection...');
+    
+    // Get current backend URL
+    const API_URL = await getBackendUrl();
+    console.log('Testing API at:', API_URL);
     
     const testPayload = {
       action: 'resumir',
