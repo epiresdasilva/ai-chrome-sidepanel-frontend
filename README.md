@@ -61,6 +61,4 @@ npm run build
 
 A extensão se comunica com um backend via API REST. Configure a URL do backend no arquivo `src/utils/api.ts`.
 
-## Licença
-
-MIT
+O backend deve ser publicado numa conta AWS ou então rodar local. Você pode obter o projeto aqui: https://github.com/epiresdasilva/ai-chrome-sidepanel-backend
