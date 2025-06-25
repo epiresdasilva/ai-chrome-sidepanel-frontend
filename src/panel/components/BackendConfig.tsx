@@ -65,7 +65,7 @@ const BackendConfig: React.FC<BackendConfigProps> = ({ onUrlChange }) => {
       borderRadius: '4px',
       fontSize: '12px'
     }}>
-      <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>
+      <div style={{ fontWeight: 'bold', marginBottom: '5px', color: '#495057' }}>
         🔧 Configuração do Backend
       </div>
       

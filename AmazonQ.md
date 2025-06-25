@@ -34,6 +34,37 @@ Para aplicações de página única (SPAs) como Notion e Medium, a extensão uti
 
 ### Configuração do Backend
 
+## Renderização de Markdown
+
+A extensão inclui um renderizador de Markdown personalizado que formata as respostas da IA de forma elegante:
+
+### Funcionalidades Suportadas
+- **Cabeçalhos**: `# H1`, `## H2`, `### H3`, etc.
+- **Texto em negrito**: `**texto**`
+- **Texto em itálico**: `*texto*`
+- **Código inline**: `` `código` ``
+- **Blocos de código**: 
+  ```
+  ```javascript
+  código aqui
+  ```
+  ```
+- **Listas não ordenadas**: `- item` ou `* item`
+- **Listas ordenadas**: `1. item`, `2. item`
+- **Links**: `[texto](url)`
+- **Quebras de linha** e **parágrafos**
+
+### Interface Visual
+- **Botão de cópia**: Permite copiar a resposta completa
+- **Scroll automático**: Para respostas longas
+- **Syntax highlighting**: Para blocos de código
+- **Tipografia otimizada**: Para melhor legibilidade
+
+### Componentes
+- `MarkdownRenderer`: Componente React para renderização
+- `markdownRenderer.ts`: Parser de Markdown personalizado
+- `ResponseDisplay`: Interface com botão de cópia
+
 ## Validação de Tokens
 
 A extensão implementa validação de tokens alinhada com o backend para garantir que o conteúdo enviado não exceda os limites:
